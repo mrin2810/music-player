@@ -1,11 +1,35 @@
+const image = document.querySelector('img');
+const title = document.getElementById('title');
+const artist = document.getElementById('artist');
 const music = document.querySelector('audio');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
-// Check if playing
+let songNum = 0;
+const songs = [
+    {
+        name: 'Dil-Se-Re',
+        displayName: 'Dil Se Re',
+        artist: 'A. R. Rehman',
+    },
+    {
+        name: 'Jiya-Jale-Jaan-Jale',
+        displayName: 'Jiya Jale Jaan Jale',
+        artist: 'A. R. Rehman',
+    },
+    {
+        name: 'Kuch-Sher-Sunata-Hoon',
+        displayName: 'Kuch Sher Sunata Hoon',
+        artist: 'A. R. Rehman',
+    },
+    {
+        name: 'Phir-Se-Ud-Chala',
+        displayName: 'Phir Se Ud Chala',
+        artist: 'A. R. Rehman',
+    },
+];
 
 let isPlaying = false;
-
 function playSong() {
     isPlaying = true;
     playBtn.classList.replace('fa-play', 'fa-pause');
@@ -20,4 +44,33 @@ function pauseSong() {
     music.pause();
 }
 
+function prevSong() {
+    if(songNum === 0) {
+        songNum = 3;
+    } 
+    else {
+        songNum = (songNum - 1) % songs.length;
+    }
+    loadSong(songs[songNum]);
+    playSong();
+}
+
+function nextSong() {
+    songNum = (songNum + 1) % songs.length;
+    loadSong(songs[songNum])
+    playSong();
+}
+
 playBtn.addEventListener('click', () => {(isPlaying ? pauseSong() : playSong())});
+nextBtn.addEventListener('click', nextSong);
+prevBtn.addEventListener('click', prevSong);
+
+// Update DOM 
+
+function loadSong(song) {
+    title.textContent = song.displayName;
+    image.setAttribute('src', `img/${song.name}.jpg`);
+    music.setAttribute('src', `music/${song.name}.mp3`);
+}
+
+loadSong(songs[3])
