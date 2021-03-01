@@ -31,6 +31,7 @@ body {
   position: relative;
   top: -50px;
   left: 50px;
+  user-select: none;
 }
 
 .img-container img {
@@ -92,7 +93,12 @@ h3 {
   font-size: 30px;
   color: rgb(129, 129, 129);
   margin-right: 30px;
+  cursor: pointer;
+  user-select: none;
+}
 
+.fas:hover {
+  filter: brightness(80%);
 }
 
 
