@@ -73,6 +73,22 @@ function updateProgressBar(e) {
         const progressPercent = currentTime / duration * 100;
         console.log(progressPercent);
         progress.style.width = `${progressPercent}%`;
+        const durMins = Math.floor(duration / 60);
+        let durSec = Math.floor(duration % 60);
+        if(durSec < 10){
+            durSec = `0${durSec}`;
+        }
+        if(durSec){
+            durationElem.textContent = `${durMins}:${durSec}`;
+        }
+        const curMins = Math.floor(currentTime / 60);
+        let curSec = Math.floor(currentTime % 60);
+        if(curSec < 10){
+            curSec = `0${curSec}`;
+        }
+        if(curSec){
+            currTime.textContent = `${curMins}:${curSec}`;
+        }
     }
 }
 
